@@ -1,7 +1,7 @@
 from http import HTTPStatus
 from django.test import Client, TestCase
 from django.urls import reverse
-import json
+
 
 
 class StaticPagesURLTests(TestCase):
@@ -20,5 +20,5 @@ class StaticPagesURLTests(TestCase):
     def test_page_shows_correct_context(self):
         """Проверка контекста страниц."""
         response = self.guest_client.get('/second/')
-
         print(response)
+        self.assertContains(response, 'А это вторая страница!')
