@@ -32,4 +32,4 @@ jobs:
     - name: Test with flake8 and django tests
       run: |
         # запуск проверки проекта по flake8
-        python -m flake8
+        python -m flake8 --exclude tests,infra_project/infra_app/migrations,infra_project/infra_project/settings.py,venv

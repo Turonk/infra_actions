@@ -3,10 +3,10 @@ ignore =
     W503,
     F811
 exclude =
-    tests/,
-    */migrations/,
-    venv/,
-    env/
+    tests,
+    */migrations,
+    venv,
+    env
 per-file-ignores =
     */settings.py:E501
 max-complexity = 10
