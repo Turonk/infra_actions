@@ -12,7 +12,7 @@ class StaticPagesURLTests(TestCase):
         response = self.guest_client.get('/')
         self.assertEqual(response.status_code, HTTPStatus.OK)
 
-        response = self.guest_client.get('/second_page/')
+        response = self.guest_client.get('/second/')
         self.assertEqual(response.status_code, HTTPStatus.OK)
 
     def test_page_shows_correct_content(self):
@@ -20,5 +20,5 @@ class StaticPagesURLTests(TestCase):
         response = self.guest_client.get('/')
         self.assertContains(response, 'У меня получилось!')
 
-        response = self.guest_client.get('/second_page/')
+        response = self.guest_client.get('/second/')
         self.assertContains(response, 'А это вторая страница!')
