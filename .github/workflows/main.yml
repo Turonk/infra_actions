@@ -70,4 +70,4 @@ jobs:
             sudo docker pull jakondak/determined_bardeen
             #остановка всех контейнеров
             sudo docker stop $(sudo docker ps -a -q)
-            sudo docker run --rm -d -p 5000:5000 Jakondak/infra_actions
+            sudo docker run --rm -d -p 5000:5000 jakondak/determined_bardeen
