@@ -4,22 +4,17 @@ on: [push]
 
 jobs:
   tests:
- 
     runs-on: ubuntu-latest
 
     steps:
-
     - uses: actions/checkout@v2
-    - name: Set up Python
-
+    - name: Set up Python 
       uses: actions/setup-python@v2
       with:
-
         python-version: 3.7
 
     - name: Install dependencies
       run: | 
-
         python -m pip install --upgrade pip 
 
         pip install flake8 pep8-naming flake8-broken-line flake8-return flake8-isort
@@ -28,5 +23,9 @@ jobs:
 
     - name: Test with flake8 and django tests
       run: |
-        # запуск проверки проекта по flake8
-        python -m flake8 
+
+        python -m flake8
+
+        cd infra_project/
+
+        python manage.py test
