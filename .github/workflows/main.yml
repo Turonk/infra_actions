@@ -60,4 +60,20 @@ jobs:
           uses: docker/build-push-action@v2 
           with:
             push: true
-            tags: usenkomaksim152/gates:latest 
+            tags: usenkomaksim152/gates:latest
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build_and_push_to_docker_hub
+    steps:
+    - name: executing remote ssh commands to deploy
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USER }}
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+          # Выполняет pull образа с DockerHub
+          sudo docker pull usenkomaksim152/gates
+          #остановка всех контейнеров
+          sudo docker stop $(sudo docker ps -a -q)
+          sudo docker run --rm -d -p 5000:5000 usenkomaksim152/gates
