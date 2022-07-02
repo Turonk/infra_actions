@@ -71,9 +71,10 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USER }}
         key: ${{ secrets.SSH_KEY }}
+        passphrase: ${{ secrets.PASSPHRASE }}
         script: |
           # Выполняет pull образа с DockerHub
           sudo docker pull usenkomaksim152/gates
           #остановка всех контейнеров
           sudo docker stop $(sudo docker ps -a -q)
-          sudo docker run --rm -d -p 5000:5000 usenkomaksim152/gates
+          sudo docker run --rm -d -p 5000:5000 usenkomaksim152/gates 
