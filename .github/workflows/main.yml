@@ -57,6 +57,6 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         passphrase: ${{ secrets.PASSPHRASE }} 
         script: |
-          sudo docker pull ${{ secrets.DOCKER_USER }}/infra_ac
+          sudo docker pull niksin1/infra_ac
           sudo docker stop $(sudo docker ps -a -q)
-          sudo docker run --rm -d -p 5000:5000 ${{ secrets.DOCKER_USER }}/infra_ac
+          sudo docker run --rm -d -p 5000:5000 niksin1/infra_ac
