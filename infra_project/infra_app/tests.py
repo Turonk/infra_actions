@@ -1,3 +1,5 @@
+# infra_project/infra_app/tests.py
+
 from http import HTTPStatus
 
 from django.test import Client, TestCase
@@ -21,4 +23,4 @@ class StaticPagesURLTests(TestCase):
         self.assertContains(response, 'У меня получилось!')
 
         response = self.guest_client.get('/second_page/')
-        self.assertContains(response, 'А это вторая страница!')
+        self.assertContains(response, 'А это вторая страница')
