@@ -14,7 +14,7 @@ __pycache__/
 .vscode/
 *.code-workspace
 
-# C extensions
+
 *.so
 
 # Distribution / packaging
