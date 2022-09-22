@@ -51,10 +51,10 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }} # Если ваш ssh-ключ защищён фразой-паролем
           script: |
             # Выполняет pull образа с DockerHub
-            sudo docker pull bednenko1604/none
+            sudo docker pull bednenko1604/test:v1
             #остановка всех контейнеров
             sudo docker stop $(sudo docker ps -a -q)
-            sudo docker run --rm -d -p 5000:5000 bednenko1604/none
+            sudo docker run --rm -d -p 5000:5000 bednenko1604/test:v1
 build_and_push_to_docker_hub:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
@@ -70,11 +70,11 @@ build_and_push_to_docker_hub:
         # Запуск скрипта авторизации на Docker Hub
         uses: docker/login-action@v1 
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          username: ${{ secrets.USER}}
+          password: ${{ secrets.PASSPHRASE}}
       - name: Push to Docker Hub
         # Пуш образа в Docker Hub 
         uses: docker/build-push-action@v2 
         with:
           push: true
-          tags: bednenko1604/none:latest
+          tags: bednenko1604/test:v1
