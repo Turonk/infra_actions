@@ -32,7 +32,7 @@ jobs:
         # запустить написанные разработчиком тесты
         python manage.py test
  
-build_and_push_to_docker_hub:
+  build_and_push_to_docker_hub:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     needs: tests
@@ -47,11 +47,11 @@ build_and_push_to_docker_hub:
         # Запуск скрипта авторизации на Docker Hub
         uses: docker/login-action@v1 
         with:
-          username: <ваш_username_dockerhub> 
-          password: <ваш_пароль_dockerhub>
+          username: igorryba
+          password: oukb1488PIZDA
       - name: Push to Docker Hub
         # Пуш образа в Docker Hub 
         uses: docker/build-push-action@v2 
         with:
           push: true
-          tags: ваш-логин-на-docker-hub/ваш-репозиторий-на-docker-hub:latest 
+          tags: igorryba/ваш-репозиторий-на-docker-hub:latest 
