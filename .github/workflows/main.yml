@@ -12,7 +12,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Set up Python
       # Запуск actions setup-python — готового скрипта
-      # для развёртывания окружения Pytho
+      # для развёртывания окружения Pyth
       uses: actions/setup-python@v2
       with:
         # Выбор версии Python
