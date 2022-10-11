@@ -66,6 +66,6 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }} # Если ваш ssh-ключ защищён фразой-паролем
           script: |
-            sudo docker pull saintroman77/infra_action
+            sudo docker pull saintroman77/infra_actions:latest
             sudo docker stop $(sudo docker ps -a -q)
-            sudo docker run --rm -d -p 5000:5000 saintroman77/infra_action
+            sudo docker run --rm -d -p 5000:5000 saintroman77/infra_actions:latest
