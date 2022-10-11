@@ -21,14 +21,12 @@ jobs:
 
     - name: Install dependencies
       run: |
-        # обновление pip
         python -m pip install --upgrade pip
-        # установка flake8 и его плагинов
         pip install flake8 pep8-naming flake8-broken-line flake8-return flake8-isort
-        # установка зависимостей
         pip install -r requirements.txt
 
     - name: Test with flake8 and django tests
       run: |
-        # запуск проверки проекта по flake8
         python -m flake8
+        cd infra_project/
+        python manage.py test
