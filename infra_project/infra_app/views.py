@@ -11,3 +11,7 @@ def second_page(request):
 
 def third_page(request):
     return HttpResponse('А это вторая страница')
+
+
+def fourth_page(request):
+    return HttpResponse('А это вторая страница')
