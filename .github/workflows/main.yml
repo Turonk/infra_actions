@@ -52,11 +52,7 @@ build_and_push_to_docker_hub:
           push: true
           tags: ruslan2612/wer_v2:latest
 
-<<<<<<< HEAD
 deploy:
-=======
-  deploy:
->>>>>>> badfb9a743b1bfda7a378bc8314a3722158757b2
     runs-on: ubuntu-latest
     needs: build_and_push_to_docker_hub
     steps:
