@@ -25,7 +25,6 @@ jobs:
         python manage.py test
         name: Django-app workflow
 
-on: [ main ]
   build:
     runs-on: ubuntu-latest
     needs: tests
