@@ -24,8 +24,6 @@ jobs:
         cd infra_project/
         python manage.py test
         name: Django-app workflow
-
-on:
   push:
     branches: [ main ]
     build_and_push_to_docker_hub:
