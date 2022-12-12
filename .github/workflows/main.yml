@@ -21,7 +21,6 @@ jobs:
     steps:
     build_and_push_to_docker_hub:
     name: Push Docker image to Docker Hub
-      - name: Check out the repo
         # Проверка доступности репозитория Docker Hub для workflow
         uses: actions/checkout@v2 
       - name: Set up Docker Buildx
