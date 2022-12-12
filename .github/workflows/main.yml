@@ -24,8 +24,6 @@ jobs:
         cd infra_project/
         python manage.py test
         name: Django-app workflow
-      
-name: Django-app workflow
 
 on:
   push:
