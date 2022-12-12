@@ -3,7 +3,6 @@ name: Django-app workflow
 on:
   push:
     branches: [ main ]
-    ...
 
 jobs:
     # Запустить тестирование приложения
