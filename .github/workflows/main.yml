@@ -1,22 +1,42 @@
 name: Django-app workflow
 
-on:
-  push:
-    branches: [ main ]
+on: [push]
 
 jobs:
-    # Запустить тестирование приложения
   tests:
     runs-on: ubuntu-latest
+
     steps:
-  # Собрать и отправить образ приложения на DockerHub
-  build:
-    runs-on: ubuntu-latest
-    needs: tests # Не выполнять сразу, ждать, пока выполнится tests
-    steps:
-  # Деплой приложения на удалённый сервер
-    build_and_push_to_docker_hub:
+    - uses: actions/checkout@v2
+    - name: Set up Python 
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.7
+
+    - name: Install dependencies
+      run: | 
+        # обновление pip
+        python -m pip install --upgrade pip 
+        # установка flake8 и его плагинов
+        pip install flake8 pep8-naming flake8-broken-line flake8-return flake8-isort
+        # установка зависимостей
+        pip install -r requirements.txt 
+
+    - name: Test with flake8 and django tests
+      run: |
+        # запуск проверки проекта по flake8
+        python -m flake8
+        # перейти в папку, содержащую manage.py — 
+        #<корневая_папка_infra_actions>/<папка_проекта>/manage.py
+        cd infra_project/
+        # запустить написанные разработчиком тесты
+        python manage.py test
+build_and_push_to_docker_hub:
     name: Push Docker image to Docker Hub
+    runs-on: ubuntu-latest
+    needs: tests
+    steps:
+      - name: Check out the repo
         # Проверка доступности репозитория Docker Hub для workflow
         uses: actions/checkout@v2 
       - name: Set up Docker Buildx
