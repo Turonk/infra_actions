@@ -1,0 +1,37 @@
+# это название workflow
+name: CI
+
+# ивент, описывает событие-триггер, после которого сработает workflow;
+on:
+  push:
+    # это ветка, в которую должен быть сделан push, чтобы workflow запустился
+    branches: [ master ]
+  pull_request:
+    # описан второй триггер: пул-реквест в ветку мастер. 
+    # В отличие от push, триггер на pull_request сработает, 
+    # когда кто-то сделает запрос на изменение кода в ветке master. 
+    branches: [ master ]
+# список действий, которые выполняются после срабатывания события on, при запуске workflow
+# Каждый job запускается в изолированном окружении, которое создаёт сервис GitHub Actions
+jobs:
+  build:
+    # Настройки окружения определяются в ключе runs-on, созданном шаблоне указана последняя версия Ubuntu
+    runs-on: ubuntu-latest
+    
+    # Под ключом steps записывается перечень шагов, команд, которые будут выполнены в этом блоке
+    steps:
+    # Вместо run можно применять uses — для вызова actions. 
+    # Actions — это скрипты, которые можно написать заранее и вызывать по имени из разных workflow
+    - uses: actions/checkout@v2
+    
+    # Каждому шагу можно дать имя — для этого применяется ключ name
+    - name: Run a one-line script
+    # В ключе run хранится команда, которая будет выполнена в терминале окружения
+      run: echo Hello, World!
+      
+    - name: Run a multy0line sacripts
+    
+      run:
+        echo Add other actions to build,
+        echo test, and deploy your project.
+        
