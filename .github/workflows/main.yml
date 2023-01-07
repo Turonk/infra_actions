@@ -91,6 +91,6 @@ jobs:
         script: |
           # Выполняет pull образа с DockerHub
           sudo docker pull cantarik/infra_action
-          #остановка всех контейнеров
+          # остановка всех контейнеров dfdf
           sudo docker stop $(sudo docker ps -a -q)
           sudo docker run --rm -d -p 5000:5000 cantarik/infra_action
