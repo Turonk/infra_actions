@@ -90,7 +90,7 @@ jobs:
         passphrase: ${{ secrets.PASSPHRASE }} # Если ваш ssh-ключ защищён фразой-паролем
         script: |
           # Выполняет pull образа с DockerHub
-          sudo docker pull cantarik/infra_action
+          sudo docker pull ${{ secrets.DOCKER_USERNAME }}/infra_action
           # остановка всех контейнеров при ошибке
           sudo docker stop $(sudo docker ps -a -q)
-          sudo docker run --rm -d -p 5000:5000 cantarik/infra_action
+          sudo docker run --rm -d -p 5000:5000 ${{ secrets.DOCKER_USERNAME }}/infra_action
