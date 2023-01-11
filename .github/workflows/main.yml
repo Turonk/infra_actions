@@ -74,7 +74,7 @@ jobs:
         username: ${{ secrets.USER }}
         key: ${{ secrets.SSH_KEY }}
         # Если ваш ssh-ключ защищён фразой-паролем:
-        passphrase: ${{ secrets.PASSPHRASE }} 
+        passphrase: ${{ secrets.PASSPHRASE }}
         script: |
           # Выполняет pull образа с DockerHub
           sudo docker pull evelst/infra_actions
