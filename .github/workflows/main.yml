@@ -6,8 +6,12 @@ on:
   # на push и pull_request, только для ветки master
   push:
     branches: [master]
+    branches:
+    - main
   pull_request:
     branches: [master]
+    branches:
+    - main
 
 # одно или несколько заданий, которые могут быть запущены параллельно или последовательно
 jobs:
