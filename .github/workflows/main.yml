@@ -3,9 +3,8 @@ name: CI
 
 # список событий, при которых будут запускаться задания
 on:
-  # на push и pull_request, только для ветки master
   push:
-    branches: [master]
+    branches:
     branches:
     - main
   pull_request:
