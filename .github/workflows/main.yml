@@ -1,35 +1,35 @@
-# имя, которое будет показано в интерфейсе github.com
-name: CI
-# список событий, при которых будут запускаться задания
-on:
-  # на push и pull_request, только для ветки master
-  push:
-    branches: [master]
-    branches:
-    - main
-  pull_request:
-    branches: [master]
-    branches:
-    - main
+# .github/workflows/**main.yml**
+name: Django-app workflow
 
-# одно или несколько заданий, которые могут быть запущены параллельно или последовательно
+on: [push]
+
 jobs:
-
-  build:
-    # задание будет выполняться на последней версии Ubuntu
+  tests:
+    # «Раннер» — создание изолированного окружения с последней версией Ubuntu 
     runs-on: ubuntu-latest
 
-    # шаги задания запускаются последовательно
     steps:
-      # при выполнении задания будет доступен наш репозиторий
-      - uses: actions/checkout@v2
+    # Запуск actions checkout — готового скрипта 
+    # для клонирования репозитория
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      # Запуск actions setup-python — готового скрипта 
+      # для развёртывания окружения Python
+      uses: actions/setup-python@v2
+      with:
+        # Выбор версии Python
+        python-version: 3.7
 
-      # запуск одной shell-команды
-      - name: Run a on-line script
-        run: echo Hello, World!
+    - name: Install dependencies
+      run: | 
+        # обновление pip
+        python -m pip install --upgrade pip 
+        # установка flake8 и его плагинов
+        pip install flake8 pep8-naming flake8-broken-line flake8-return flake8-isort
+        # установка зависимостей
+        pip install -r requirements.txt 
 
-      # запуск двух shell-команд
-      - name: Run a mult-line script
-        run: |
-          echo "Single job, step two, command one"
-          echo "Single job, step two, command two"
+    - name: Test with flake8 and django tests
+      run: |
+        # запуск проверки проекта по flake8
+        python -m flake8
