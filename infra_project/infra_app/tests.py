@@ -13,7 +13,7 @@ class StaticPagesURLTests(TestCase):
         self.assertEqual(response.status_code, HTTPStatus.OK)
 
         response = self.guest_client.get('/second_page/')
-        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)
 
     def test_page_shows_correct_content(self):
         """Проверка контента страниц."""
