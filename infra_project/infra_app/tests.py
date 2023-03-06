@@ -1,7 +1,9 @@
 # infra_project/infra_app/tests.py
 
 from http import HTTPStatus
-from django.test import Client, TestCase
+from django.test import Client
+from django.test import TestCase
+
 
 class StaticPagesURLTests(TestCase):
     def setUp(self):
