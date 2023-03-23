@@ -55,26 +55,9 @@ jobs:
         with:
           push: true
           tags: novssk/infra_actions:latest
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build_and_push_to_docker_hub
-    steps:
-    - name: executing remote ssh commands to deploy
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USER }}
-        key: ${{ secrets.SSH_KEY }}
-        passphrase: ${{ secrets.PASSPHRASE }} # Если ваш ssh-ключ защищён фразой-паролем
-        script: |
-          # Выполняет pull образа с DockerHub
-          sudo docker pull ${{ secrets.DOCKER_USERNAME }}/infra_actions
-          #остановка всех контейнеров
-          sudo docker stop $(sudo docker ps -a -q)
-          sudo docker run --rm -d -p 5000:5000 ${{ secrets.DOCKER_USERNAME }}/infra_actions
   send_message:
    runs-on: ubuntu-latest
-   needs: deploy
+   needs: build_and_push_to_docker_hub
    steps:
     - name: send message
       uses: appleboy/telegram-action@master
