@@ -6,15 +6,34 @@ on:
   pull_request:
     branches: [master]
 
+env:
+  ENVIRONMENT: production
+
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      - name: Run a multi-line script
+      - name: Install dependencies
         run: |
-          echo Add other actions to build, test, and deploy your project.
+          sudo apt-get update && sudo apt-get -y install python3-pip
+          pip3 install -r requirements.txt
+
+      - name: Build project
+        run: |
+          python3 manage.py collectstatic --noinput
+          python3 manage.py migrate
+
+      - name: Deploy project
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_KEY }}
+          port: ${{ secrets.SERVER_PORT }}
+          script: |
+            cd /var/www/myapp
+            git pull
+            systemctl restart myapp.service
