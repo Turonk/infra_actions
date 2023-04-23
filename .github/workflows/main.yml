@@ -1,23 +1,16 @@
-# .github/workflows/**main.yml**
 name: Django-app workflow
 
 on: [push]
 
 jobs:
   tests:
-    # «Раннер» — создание изолированного окружения с последней версией Ubuntu 
     runs-on: ubuntu-latest
 
     steps:
-    # Запуск actions checkout — готового скрипта 
-    # для клонирования репозитория
     - uses: actions/checkout@v2
-    - name: Set up Python
-      # Запуск actions setup-python — готового скрипта 
-      # для развёртывания окружения Python
+    - name: Set up Python 
       uses: actions/setup-python@v2
       with:
-        # Выбор версии Python
         python-version: 3.7
 
     - name: Install dependencies
@@ -33,3 +26,8 @@ jobs:
       run: |
         # запуск проверки проекта по flake8
         python -m flake8
+        # перейти в папку, содержащую manage.py — 
+        #<корневая_папка_infra_actions>/<папка_проекта>/manage.py
+        cd infra_project/
+        # запустить написанные разработчиком тесты
+        python manage.py test
