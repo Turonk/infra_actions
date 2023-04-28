@@ -76,4 +76,4 @@ jobs:
            sudo docker pull sarymov/my_images:latest
            #остановка всех контейнеров
            sudo docker stop $(sudo docker ps -a -q)
-           sudo docker run --rm -d -p 5000:5000 sarymov/my_images:tagnamet
+           sudo docker run --rm -d -p 5000:5000 sarymov/my_images:latest
