@@ -37,7 +37,7 @@ jobs:
 # Тут ваши задачи тестирования и сборки образа
 # ...
 # Сразу после них добавьте новую задачу: деплой приложения
- build_and_push_to_docker_hub:
+  build_and_push_to_docker_hub:
      name: Push Docker image to Docker Hub
      runs-on: ubuntu-latest
      needs: tests
