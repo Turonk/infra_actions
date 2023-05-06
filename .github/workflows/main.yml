@@ -1,9 +1,11 @@
 name: CI
+
 on:
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+    
 jobs:
   build:
     runs-on: ubuntu latest
@@ -11,9 +13,9 @@ jobs:
     - uses: actions/checkout@v2
     
     - name: Run one-liner
-    - run: echo Hello, world!
+      run: echo Hello, world!
     
     - name: Run multi-liner
-    - run: |
+      run: |
         echo multi
         echo liner
