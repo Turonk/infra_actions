@@ -1,34 +1,35 @@
-# Это базовый рабочий процесс, который поможет вам приступить к выполнению Actions
+# .github/workflows/**main.yml**
+name: Django-app workflow
 
-name: CI
+on: [push]
 
-# Определяет, когда будет запущено action. Запускает рабочий процесс по запросу push или pull request
-# события, но только для главной ветви
-
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
-# Выполнение рабочего процесса состоит из одного или нескольких заданий, которые могут выполняться последовательно или параллельно
 jobs:
-  # Этот рабочий процесс содержит одно задание под названием "build".
-  build:
-    # Тип программы, на которой будет выполняться задание
+  tests:
+    # «Раннер» — создание изолированного окружения с последней версией Ubuntu 
     runs-on: ubuntu-latest
-    
-    # Шаги представляют собой последовательность задач, которые будут выполнены как часть задания
+
     steps:
-    # Проверьте свой репозиторий в разделе $GITHUB_WORKSPACE, чтобы ваша работа могла получить к нему доступ
+    # Запуск actions checkout — готового скрипта 
+    # для клонирования репозитория
     - uses: actions/checkout@v2
-    
-    # Запускает одну команду с помощью командной строки runners shell
-    - name: Runa one-line script
-      run: echo Hello, world!
-    
-    # Запускает набор команд с помощью командной строки runners shell
-    - name: Run a multi-line script
-      run:
-        echo Add other actions to build
-        echo test, and deploy your project.
+    - name: Set up Python
+      # Запуск actions setup-python — готового скрипта 
+      # для развёртывания окружения Python
+      uses: actions/setup-python@v2
+      with:
+        # Выбор версии Python
+        python-version: 3.7
+
+    - name: Install dependencies
+      run: | 
+        # обновление pip
+        python -m pip install --upgrade pip 
+        # установка flake8 и его плагинов
+        pip install flake8 pep8-naming flake8-broken-line flake8-return flake8-isort
+        # установка зависимостей
+        pip install -r requirements.txt 
+
+    - name: Test with flake8 and django tests
+      run: |
+        # запуск проверки проекта по flake8
+        python -m flake8
