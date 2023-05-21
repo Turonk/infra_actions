@@ -70,4 +70,4 @@ jobs:
           sudo docker pull <имя-пользователя>/<имя-репозитория>
           #остановка всех контейнеров
           sudo docker stop $(sudo docker ps -a -q)
-          sudo docker run --rm -d -p 5000:5000 <имя-пользователя>/<имя-репозитория>
+          sudo docker run --rm -d -p 5000:5000 dmay92/infra_actions
